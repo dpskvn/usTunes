@@ -1,6 +1,8 @@
 chrome.webRequest.onBeforeRequest.addListener(
     function(details) {
-         var newUrl = details.url.replace(/\/(..)\/app/, '/us/app');
+         var newUrl = details.url.replace(/(itunes.apple.com\/)(..)(\/app\/)/, function(match, p1, p2, p3){
+           return [p1, 'us', p3].join('');
+         });
          return {redirectUrl: newUrl};
     },
     {
